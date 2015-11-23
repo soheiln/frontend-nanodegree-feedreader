@@ -105,24 +105,26 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        var initialFeed, newFeed;
+        var $initialFeed, $newFeed;
 
         beforeEach(function(done){
            loadFeed(0, function(){
-                // initialFeed = $('.feed').html();
+                $initialFeed = $('.feed').text();
                 done();
            });
         });
 
         it('content should change a new feed is loaded', function(done){
-            initialFeed = $('.feed');
-            // var newFeed;
+            // $initialFeed = $('.feed').text();
+            // var $newFeed;
             loadFeed(1, function(){
-                newFeed = $('.feed');
+                $newFeed = $('.feed').text();
+                expect($newFeed).not.toBe($initialFeed);
+                console.log('in it content should...');
+                console.log($initialFeed);
+                console.log($newFeed);
+                done();
             });
-            expect(newFeed).toBeDefined;
-            expect(newFeed).not.toBe(initialFeed);
-            done();
         });
 
     });
