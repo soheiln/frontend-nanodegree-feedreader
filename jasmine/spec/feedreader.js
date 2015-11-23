@@ -31,7 +31,7 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-         it('feeds have URLs', function() {
+         it('feeds have defined and non-empty URLs', function() {
             for(var i = 0; i < allFeeds.length; i++) {
                 expect(allFeeds[i].url).toBeDefined;
                 expect(allFeeds[i].url.length).not.toBe(0);
@@ -43,7 +43,7 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-         it('feeds have names', function() {
+         it('feeds have defined and non-empty names', function() {
             for(var i = 0; i < allFeeds.length; i++) {
                 expect(allFeeds[i].name).toBeDefined;
                 expect(allFeeds[i].name.length).not.toBe(0);
@@ -52,7 +52,6 @@ $(function() {
     });
 
 
-    /* TODO: Write a new test suite named 'The menu' */
     describe('The Menu', function(){
 
 
@@ -99,25 +98,29 @@ $(function() {
          });
     });
 
+
     describe('New Feed Selection', function(){
 
         /* A test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        var initialFeed, newFeed;
+
         beforeEach(function(done){
            loadFeed(0, function(){
-               done();
+                // initialFeed = $('.feed').html();
+                done();
            });
         });
 
         it('content should change a new feed is loaded', function(done){
-            var initialFeed = $('.feed');
-            var newFeed;
-            loadFeed(1, function(done){
+            initialFeed = $('.feed');
+            // var newFeed;
+            loadFeed(1, function(){
                 newFeed = $('.feed');
-                done();
             });
+            expect(newFeed).toBeDefined;
             expect(newFeed).not.toBe(initialFeed);
             done();
         });
